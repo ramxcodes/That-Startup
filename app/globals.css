@@ -47,7 +47,7 @@
         @apply font-normal text-sm text-white-100/80;
     }
 
-    .pink_container {
+    .orange_container {
         @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
     }
 
