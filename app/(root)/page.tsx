@@ -9,12 +9,13 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
-  const { data: posts } = await sanityFetch({ query: STARTUP_QUERY });
-  // console.log(JSON.stringify(posts, null, 2));
+  const params = { search: query || null };
+
+  const { data: posts } = await sanityFetch({ query: STARTUP_QUERY, params });
 
   return (
     <>
-      <section className="orange_container pattern">
+      <section className="orange_container sm:pattern">
         <h1 className="heading">
           Pitch Your Startup, <br /> Connect with Entrepreneurs
         </h1>

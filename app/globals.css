@@ -48,7 +48,7 @@
     }
 
     .orange_container {
-        @apply w-full bg-primary min-h-[530px] lg:pattern md:pattern sm:pattern flex justify-center items-center flex-col py-10 px-6;
+        @apply w-full bg-primary min-h-[530px] sm:pattern flex justify-center items-center flex-col py-10 px-6;
     }
 
     .tag {
