@@ -1,5 +1,7 @@
+import { client } from "@/sanity/lib/client";
 import SearchForm from "../../components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import { STARTUP_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({
   searchParams,
@@ -7,20 +9,8 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
-
-  const posts = [
-    {
-      _createdAt: new Date(),
-      views: 5500,
-      author: { _id: 1, name: "John Doe" },
-      _id: 1,
-      description: "A new way to connect with friends",
-      image:
-        "https://images.unsplash.com/photo-1732562534798-9d7198f459d6?q=80&w=1827&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      category: "Social Media",
-      title: "Friend Connect",
-    },
-  ];
+  const posts = await client.fetch(STARTUP_QUERY);
+  // console.log(JSON.stringify(posts, null, 2));
 
   return (
     <>
