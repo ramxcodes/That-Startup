@@ -6,16 +6,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import markdownit from "markdown-it";
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import View from "@/components/View";
 
 const md = markdownit();
+const View = dynamic(() => import("@/components/View"), { loading: () => <Skeleton className="view-skeleton" /> });
 
 export const experimental_ppr = true;
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const id = (await params).id;
+const page = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
 
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   if (!post) return notFound();
@@ -71,10 +72,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <hr className="divider" />
 
         {/* TODO: EDITOR SELECTED STARTUP */}
-          <Suspense fallback={<Skeleton className="view-skeleton" />}>
-            <View id={id} />
-          </Suspense>
-        
+        <Suspense fallback={<Skeleton className="view-skeleton" />}>
+          <View id={id} />
+        </Suspense>
       </section>
     </>
   );
